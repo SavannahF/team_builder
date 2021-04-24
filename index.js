@@ -12,15 +12,6 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
-// Choice between this or fs route??
-const generatePage = require("./src/template-page");
-const writeFile = require("./src/generate-site");
-
-// // or path module??
-// const OUTPUT_DIR = path.resolve(__dirname, "output");
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
-// const render = require("./lib/htmlRenderer");
-
 let manager = [];
 let engineer = [];
 let intern = [];
