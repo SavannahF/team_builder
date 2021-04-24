@@ -115,7 +115,7 @@ function startHtml() {
     </head>
     <body>
         <nav class="navbar navbar-dark bg-dark mb-5">
-            <span class="navbar-brand mb-0 h1 w-100 text-center">Members</span>
+            <span class="navbar-brand mb-0 h1 w-100 text-center"><h2>Members</h2></span>
         </nav>
         <div class="container">
             <div class="row">`;
