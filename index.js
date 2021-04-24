@@ -30,6 +30,76 @@ let employeeArr = { manager, engineer, intern };
 // let team = [];
 
 // Still need to put input prompts in this space..
+function initApp() {
+  startHtml();
+  addMember();
+}
+
+function addMember() {
+  inquirer
+    .prompt([
+      {
+        message: "Enter team member's name",
+        name: "name",
+      },
+      {
+        type: "list",
+        message: "Select team member's role",
+        choices: ["Engineer", "Intern", "Manager"],
+        name: "role",
+      },
+      {
+        message: "Enter team member's id",
+        name: "id",
+      },
+      {
+        message: "Enter team member's email address",
+        name: "email",
+      },
+    ])
+    .then(function ({ name, role, id, email }) {
+      let roleInfo = "";
+      if (role === "Engineer") {
+        roleInfo = "GitHub username";
+      } else if (role === "Intern") {
+        roleInfo = "school name";
+      } else {
+        roleInfo = "office phone number";
+      }
+      inquirer
+        .prompt([
+          {
+            message: `Enter team member's ${roleInfo}`,
+            name: "roleInfo",
+          },
+          {
+            type: "list",
+            message: "Would you like to add more team members?",
+            choices: ["yes", "no"],
+            name: "moreMembers",
+          },
+        ])
+        .then(function ({ roleInfo, moreMembers }) {
+          let newMember;
+          if (role === "Engineer") {
+            newMember = new Engineer(name, id, email, roleInfo);
+          } else if (role === "Intern") {
+            newMember = new Intern(name, id, email, roleInfo);
+          } else {
+            newMember = new Manager(name, id, email, roleInfo);
+          }
+          employees.push(newMember);
+          addHtml(newMember).then(function () {
+            if (moreMembers === "yes") {
+              addMember();
+            } else {
+              finishHtml();
+            }
+          });
+        });
+    });
+}
+// END OPTION 1
 
 // Creating HTML document ./dist/team.html
 function startHtml() {
@@ -40,6 +110,7 @@ function startHtml() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/c502137733.js"></script>
         <title>Teamwork Makes the Dream Work ;)</title>
     </head>
     <body>
@@ -53,7 +124,7 @@ function startHtml() {
       console.log(err);
     }
   });
-  console.log("start");
+  //   console.log("start");
 }
 
 function addHtml(member) {
@@ -67,7 +138,7 @@ function addHtml(member) {
       const gitHub = member.getGithub();
       data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Engineer</h5>
+            <h5 class="card-header">${name}<br /><br /><i class="fas fa-glasses mr-2"></i>Engineer</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: <a href="mailto:${email}"
@@ -88,7 +159,7 @@ function addHtml(member) {
       const school = member.getSchool();
       data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Intern</h5>
+            <h5 class="card-header">${name}<br /><br /><i class="fas fa-user-graduate mr-2"></i>Intern</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: <a href="mailto:${email}"
@@ -103,7 +174,7 @@ function addHtml(member) {
       const officePhone = member.getOfficeNumber();
       data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Manager</h5>
+            <h5 class="card-header">${name}<br /><br /><i class="fas fa-mug-hot mr-2"></i>Manager</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: <a href="mailto:${email}"
@@ -115,7 +186,7 @@ function addHtml(member) {
             </div>
         </div>`;
     }
-    console.log("adding team member");
+    // console.log("adding team member");
     fs.appendFile("./dist/team.html", data, function (err) {
       if (err) {
         return reject(err);
@@ -137,7 +208,7 @@ function finishHtml() {
       console.log(err);
     }
   });
-  console.log("end");
+  console.log("html ready!");
 }
 
 initApp();
