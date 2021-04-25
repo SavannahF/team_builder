@@ -15,36 +15,32 @@ const Manager = require("./lib/Manager");
 let manager = [];
 let engineer = [];
 let intern = [];
-// let employeeArr = { manager, engineer, intern };
-// let employees = [];
 
-// let team = [];
-
-// Still need to put input prompts in this space..
+// Start Function, calling inputs and html creation
 function initApp() {
-  startHtml();
   addMember();
+  startHtml();
 }
-
+// Input Prompts
 function addMember() {
   inquirer
     .prompt([
       {
-        message: "Enter team member's name",
+        message: "Enter teammates' name",
         name: "name",
       },
       {
         type: "list",
-        message: "Select team member's role",
-        choices: ["Engineer", "Intern", "Manager"],
+        message: "Select teammates' role",
+        choices: ["Manager", "Engineer", "Intern"],
         name: "role",
       },
       {
-        message: "Enter team member's id",
+        message: "Enter teammates' id",
         name: "id",
       },
       {
-        message: "Enter team member's email address",
+        message: "Enter teammates' email address",
         name: "email",
       },
     ])
@@ -60,12 +56,12 @@ function addMember() {
       inquirer
         .prompt([
           {
-            message: `Enter team member's ${roleInfo}`,
+            message: `Enter teammates' ${roleInfo}`,
             name: "roleInfo",
           },
           {
             type: "list",
-            message: "Would you like to add more team members?",
+            message: "Do you have more members to build?",
             choices: ["yes", "no"],
             name: "moreMembers",
           },
@@ -90,7 +86,7 @@ function addMember() {
         });
     });
 }
-// END OPTION 1
+// END Prompts for Input
 
 // Creating HTML document ./dist/team.html
 function startHtml() {
