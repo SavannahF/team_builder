@@ -15,7 +15,7 @@ const Manager = require("./lib/Manager");
 let manager = [];
 let engineer = [];
 let intern = [];
-let employeeArr = { manager, engineer, intern };
+// let employeeArr = { manager, engineer, intern };
 // let employees = [];
 
 // let team = [];
