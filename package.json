@@ -1,7 +1,7 @@
 {
   "name": "team_builder",
   "version": "1.0.0",
-  "description": "<!-- README.md -->",
+  "description": "generates a list of team members based on input",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -18,8 +18,8 @@
     "url": "git+https://github.com/SavannahF/team_builder.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Savannah L Fortson",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/SavannahF/team_builder/issues"
   },
